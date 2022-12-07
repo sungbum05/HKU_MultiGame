@@ -84,6 +84,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //접속 상태 표시
         ConnectionInfoText.text = "방 참가 성공";
         //모든 룸 참가자들이 Main씬 로드
-        PhotonNetwork.LoadLevel("Main");
+        PhotonNetwork.LoadLevel("MainScene");
     }
 }
