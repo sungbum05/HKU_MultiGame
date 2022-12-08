@@ -4,17 +4,18 @@ using UnityEngine;
 using Cinemachine;
 using Photon.Pun;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : MonoBehaviourPun
 {
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        if(photonView.IsMine)
+        {
+            CinemachineVirtualCamera FollowCam = 
+                FindObjectOfType<CinemachineVirtualCamera>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            FollowCam.Follow = transform;
+            FollowCam.LookAt = transform;
+        }
     }
 }
