@@ -99,16 +99,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         foreach (var RoomInfo in roomList)
         {
             Debug.Log($"RoomName:{RoomInfo.Name}, MaxPlayer:{RoomInfo.MaxPlayers}, CurPlayer:{RoomInfo.PlayerCount}");
+            RoomData RoomInfoButton =
+                Instantiate(JoinRoomButton.gameObject, this.transform.position, Quaternion.identity).GetComponent<RoomData>();
 
-            //RoomData Data = new RoomData();
+            RoomInfoButton.transform.SetParent(ScrollViewContent.transform);
 
-            //Data.RoomSetting(RoomInfo.Name, RoomInfo.MaxPlayers, RoomInfo.PlayerCount);
-
-            //RoomData RoomInfoButton = 
-            //    Instantiate(JoinRoomButton.gameObject, this.transform.position , Quaternion.identity).GetComponent<RoomData>();
-
-            //RoomInfoButton.transform.SetParent(ScrollViewContent.transform);
-            //RoomInfoButton = Data;
+            RoomInfoButton.RoomSetting(RoomInfo.Name, RoomInfo.MaxPlayers, RoomInfo.PlayerCount);
         }
     }
     #endregion
