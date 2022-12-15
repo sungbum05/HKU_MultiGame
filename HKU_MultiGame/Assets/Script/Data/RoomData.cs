@@ -49,6 +49,11 @@ public class RoomData : MonoBehaviourPun
     public Text RoomNameText;
     public Text PlayerCountText;
 
+    private void Start()
+    {
+        this.gameObject.GetComponent<Button>().onClick.AddListener(() => PhotonNetwork.JoinRoom(roomname));
+    }
+
     public void RoomSetting(string RoomName, int MaxPlayer, int CurPlayer)
     {
         this.RoomName = RoomName;
