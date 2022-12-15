@@ -11,7 +11,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private int RoomCnt = 1;
 
+    public Transform ScrollViewContent;
+
     public Button CreateRoomButton;
+    public GameObject JoinRoomButton;
 
     //게임 실행과 동시에 마스터 서버 접속
     // Start is called before the first frame update
@@ -40,9 +43,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         RoomOptions.IsOpen = true;
         RoomOptions.IsVisible = true;
         RoomOptions.MaxPlayers = 4;
+        Debug.Log(PhotonNetwork.CountOfRooms);
 
-        PhotonNetwork.CreateRoom($"Room_{RoomCnt}", RoomOptions);
-        RoomCnt++;
+        PhotonNetwork.CreateRoom($"Room_{PhotonNetwork.CountOfRooms}", RoomOptions);
+    }
+
+    public void JoinRoom(RoomData data)
+    {
+        PhotonNetwork.JoinRoom(data.RoomName);
     }
 
     #region Photon CallBack함수
@@ -62,18 +70,46 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("로비 접속 성곡");
+        Debug.Log("로비 접속 성공");
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("룸 접속 성곡");
+        Debug.Log("룸 접속 성공");
+        PhotonNetwork.LoadLevel("MainScene");
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log(returnCode);
+        Debug.Log(message);
+        Debug.Log("방 생성 실패");
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("방 접속 실패");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         Debug.Log("룸 리스트 업데이트");
         Debug.Log(roomList.Count);
+
+        foreach (var RoomInfo in roomList)
+        {
+            Debug.Log($"RoomName:{RoomInfo.Name}, MaxPlayer:{RoomInfo.MaxPlayers}, CurPlayer:{RoomInfo.PlayerCount}");
+
+            //RoomData Data = new RoomData();
+
+            //Data.RoomSetting(RoomInfo.Name, RoomInfo.MaxPlayers, RoomInfo.PlayerCount);
+
+            //RoomData RoomInfoButton = 
+            //    Instantiate(JoinRoomButton.gameObject, this.transform.position , Quaternion.identity).GetComponent<RoomData>();
+
+            //RoomInfoButton.transform.SetParent(ScrollViewContent.transform);
+            //RoomInfoButton = Data;
+        }
     }
     #endregion
 }
