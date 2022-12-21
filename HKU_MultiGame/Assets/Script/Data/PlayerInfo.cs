@@ -13,12 +13,17 @@ public enum PlayerType
 public class PlayerInfo : MonoBehaviourPun
 {
     [SerializeField]
-    private TextMeshProUGUI PlayerName;
+    public TextMeshProUGUI PlayerName;
     [SerializeField]
     private Player[] players;
 
+    //플레이어 필드
+    [Header("플레이어 필드")]
+    [SerializeField]
+    private PlayerType Type;
+
     //플레이어 하위 오브젝트
-    [Header("플레이어 하위 오브젝트")]
+    [Header("플레이어 하위 필드")]
     [SerializeField]
     private GameObject Chaser = null;
     [SerializeField]
@@ -36,5 +41,10 @@ public class PlayerInfo : MonoBehaviourPun
         {
             PlayerName.text = $"Player{photonView.OwnerActorNr}";
         }
+    }
+
+    public void SetType(PlayerType playerType)
+    {
+        Type = playerType;
     }
 }

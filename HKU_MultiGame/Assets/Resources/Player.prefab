@@ -798,6 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerName: {fileID: 674147377}
+  Type: 0
   Chaser: {fileID: 42677726}
   Runner: {fileID: 2007266917}
 --- !u!114 &1661738494735866523
