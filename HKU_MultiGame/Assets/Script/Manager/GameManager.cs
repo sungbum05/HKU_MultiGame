@@ -10,20 +10,23 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         get
         {
-            if(m_Instance == null)
+            if (m_Instance == null)
             {
-               m_Instance = FindObjectOfType<GameManager>();
+                m_Instance = FindObjectOfType<GameManager>();
             }
 
             return m_Instance;
         }
     }
 
+    private UiManager UIMgr;
+
     public GameObject PlayerPrefab;
+    public GameObject LocalPlayerCharacter;
 
     private void Awake()
     {
-        if(Instance != this)
+        if (Instance != this)
         {
             Destroy(gameObject);
         }
@@ -32,9 +35,19 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
+        UIMgr = FindObjectOfType<UiManager>();
+
         //네트워크 상의 모든 클라이언트들에서 생성
         //단, 해당 게임 오브젝트 주도권은 생성 클라가 가지고 있음
-        PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f), 0), Quaternion.identity);
+        PhotonNetwork.LocalPlayer.TagObject = PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f), 0), Quaternion.identity);
+
+        LocalPlayerCharacter = PhotonNetwork.LocalPlayer.TagObject as GameObject;
+        UIMgr.photonView.RPC("SettingPlyerCount", RpcTarget.All);
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
