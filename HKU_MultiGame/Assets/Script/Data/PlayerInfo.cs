@@ -47,4 +47,15 @@ public class PlayerInfo : MonoBehaviourPun
     {
         Type = playerType;
     }
+
+    [PunRPC]
+    public void SettingPlyerCount()
+    {
+        PlayerCountText.text = $"{PhotonNetwork.CurrentRoom.PlayerCount} / {PhotonNetwork.CurrentRoom.MaxPlayers}";
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount.Equals(PhotonNetwork.CurrentRoom.MaxPlayers) && PhotonNetwork.IsMasterClient)
+        {
+            GameManager.Instance.photonView.RPC("PlayersTypeSelect", RpcTarget.All);
+        }
+    }
 }
