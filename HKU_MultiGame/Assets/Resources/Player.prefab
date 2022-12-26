@@ -657,10 +657,10 @@ GameObject:
   - component: {fileID: 4710276467215349504}
   - component: {fileID: 4710276467215349510}
   - component: {fileID: 4710276467215349509}
+  - component: {fileID: 4710276467215349508}
   - component: {fileID: 790436747089841035}
   - component: {fileID: 1661738494735866523}
   - component: {fileID: 3994578968236515909}
-  - component: {fileID: 4710276467215349508}
   - component: {fileID: 4710276467215349507}
   - component: {fileID: 4710276467215349512}
   m_Layer: 0
@@ -785,6 +785,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4710276467215349508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710276467215349535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 4710276467215349507}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &790436747089841035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,29 +849,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2de7227e22723342832e9fb6ecccef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4710276467215349508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4710276467215349535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 1
-  ObservedComponents:
-  - {fileID: 4710276467215349507}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &4710276467215349507
 MonoBehaviour:
   m_ObjectHideFlags: 0

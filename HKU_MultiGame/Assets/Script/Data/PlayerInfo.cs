@@ -29,6 +29,13 @@ public class PlayerInfo : MonoBehaviourPun
     [SerializeField]
     private GameObject Runner = null;
 
+    private void Awake()
+    {
+        this.gameObject.name = $"Player{photonView.OwnerActorNr}";
+
+        GameManager.Instance.LocalPlayerList.Add(this.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,5 +54,24 @@ public class PlayerInfo : MonoBehaviourPun
     public void SetType(PlayerType playerType)
     {
         Type = playerType;
+    }
+
+    [PunRPC]
+    public void SetTypeColor()
+    {
+        switch(Type)
+        {
+            case PlayerType.Runner:
+                PlayerName.color = Color.green;
+                break;
+
+            case PlayerType.Chaser:
+                PlayerName.color = Color.red;
+                break;
+
+            default:
+                PlayerName.color = Color.white;
+                break;
+        }
     }
 }

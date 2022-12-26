@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     private UiManager UIMgr;
 
     public GameObject PlayerPrefab;
-    public GameObject LocalPlayerCharacter;
+    public List<GameObject> LocalPlayerList;
 
     private void Awake()
     {
@@ -39,9 +39,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
         //네트워크 상의 모든 클라이언트들에서 생성
         //단, 해당 게임 오브젝트 주도권은 생성 클라가 가지고 있음
-        PhotonNetwork.LocalPlayer.TagObject = PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f), 0), Quaternion.identity);
+        PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f), 0), Quaternion.identity);
 
-        LocalPlayerCharacter = PhotonNetwork.LocalPlayer.TagObject as GameObject;
         UIMgr.photonView.RPC("SettingPlyerCount", RpcTarget.All);
     }
 
@@ -56,22 +55,22 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             Debug.Log(i);
             Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
 
-            GameObject Player = (GameObject)PhotonNetwork.CurrentRoom.Players[i + 1].TagObject;
+            GameObject Player = LocalPlayerList[i];
+            Debug.Log(Player.name);
             PlayerInfo Info = Player.GetComponent<PlayerInfo>();
 
             if (i.Equals(RunnerNum))
             {
                 Info.photonView.RPC("SetType", RpcTarget.All, PlayerType.Runner);
-                Info.PlayerName.color = Color.green;
             }
 
             else
             {
                 Info.photonView.RPC("SetType", RpcTarget.All, PlayerType.Chaser);
-                Info.PlayerName.color = Color.red;
             }
-        }
 
+            Info.photonView.RPC("SetTypeColor", RpcTarget.All);
+        }
     }
 
     private void Update()
