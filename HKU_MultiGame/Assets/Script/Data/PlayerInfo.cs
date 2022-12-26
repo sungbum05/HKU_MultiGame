@@ -7,7 +7,7 @@ using TMPro;
 
 public enum PlayerType
 {
-    Runner, Chaser
+    Lobby, Runner, Chaser
 }
 
 public class PlayerInfo : MonoBehaviourPun
@@ -43,19 +43,9 @@ public class PlayerInfo : MonoBehaviourPun
         }
     }
 
+    [PunRPC]
     public void SetType(PlayerType playerType)
     {
         Type = playerType;
-    }
-
-    [PunRPC]
-    public void SettingPlyerCount()
-    {
-        PlayerCountText.text = $"{PhotonNetwork.CurrentRoom.PlayerCount} / {PhotonNetwork.CurrentRoom.MaxPlayers}";
-
-        if (PhotonNetwork.CurrentRoom.PlayerCount.Equals(PhotonNetwork.CurrentRoom.MaxPlayers) && PhotonNetwork.IsMasterClient)
-        {
-            GameManager.Instance.photonView.RPC("PlayersTypeSelect", RpcTarget.All);
-        }
     }
 }

@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         UIMgr.photonView.RPC("SettingPlyerCount", RpcTarget.All);
     }
 
-    [PunRPC]
     public void PlayersTypeSelect()
     {
         Debug.Log("TYPE");
@@ -54,18 +53,21 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
         for (int i = 0; i < PhotonNetwork.CurrentRoom.Players.Count; i++)
         {
-            GameObject Player = PhotonNetwork.CurrentRoom.Players[i].TagObject as GameObject;
+            Debug.Log(i);
+            Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
+
+            GameObject Player = (GameObject)PhotonNetwork.CurrentRoom.Players[i + 1].TagObject;
             PlayerInfo Info = Player.GetComponent<PlayerInfo>();
 
             if (i.Equals(RunnerNum))
             {
-                Info.SetType(PlayerType.Runner);
+                Info.photonView.RPC("SetType", RpcTarget.All, PlayerType.Runner);
                 Info.PlayerName.color = Color.green;
             }
 
             else
             {
-                Info.SetType(PlayerType.Chaser);
+                Info.photonView.RPC("SetType", RpcTarget.All, PlayerType.Chaser);
                 Info.PlayerName.color = Color.red;
             }
         }
