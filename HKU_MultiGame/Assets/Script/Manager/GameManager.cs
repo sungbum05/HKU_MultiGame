@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                 Info.photonView.RPC("SetType", RpcTarget.All, PlayerType.Chaser);
             }
 
+            Info.photonView.RPC("ChangeTypeState", RpcTarget.All);
             Info.photonView.RPC("SetTypeColor", RpcTarget.All);
         }
     }

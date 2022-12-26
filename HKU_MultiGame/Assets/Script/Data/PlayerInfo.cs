@@ -74,4 +74,25 @@ public class PlayerInfo : MonoBehaviourPun
                 break;
         }
     }
+
+    [PunRPC]
+    public void ChangeTypeState()
+    {
+        if (photonView.IsMine)
+        {
+            switch (Type)
+            {
+                case PlayerType.Runner:
+                    Runner.SetActive(true);
+                    break;
+
+                case PlayerType.Chaser:
+                    Chaser.SetActive(true);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
 }
