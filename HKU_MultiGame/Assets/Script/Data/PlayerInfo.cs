@@ -78,6 +78,8 @@ public class PlayerInfo : MonoBehaviourPun
     [PunRPC]
     public void ChangeTypeState()
     {
+        this.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+
         if (photonView.IsMine)
         {
             switch (Type)
