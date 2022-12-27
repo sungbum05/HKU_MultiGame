@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &42677727
 Transform:
   m_ObjectHideFlags: 0
@@ -1101,8 +1101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnterItem: {fileID: 0}
-  HorizontalAttackRange: {fileID: 1906594802}
-  VerticalAttackRange: {fileID: 347722832}
+  HorizontalRange: {fileID: 0}
+  VerticalRange: {fileID: 0}
 --- !u!114 &4710276467215349507
 MonoBehaviour:
   m_ObjectHideFlags: 0
