@@ -14,6 +14,7 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
     private GameObject HorizontalRange;
     [SerializeField]
     private GameObject VerticalRange;
+    private Coroutine AttackCoroutine;
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -27,31 +28,60 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
     private void Update()
     {
 
-    }
-
-    public void HorizontalSendAttack()
-    {
-        float X = 0;
-
         if (Input.GetKeyDown(KeyCode.RightArrow))
-            X = Mathf.Abs(transform.position.x);
+            HorizontalSendAttack(1);
 
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            X = Mathf.Abs(transform.position.x) * -1;
+            HorizontalSendAttack(-1);
 
-        HorizontalRange.transform.position = new Vector3(X, 0, 0);
-    }
-
-    public void VerticalSendAttack()
-    {
-        float Y = 0;
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            Y = Mathf.Abs(transform.position.y);
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+            VerticalSendAttack(1);
 
         else if (Input.GetKeyDown(KeyCode.DownArrow))
-            Y = Mathf.Abs(transform.position.y) * -1;
+            VerticalSendAttack(-1);
+    }
+
+    public void HorizontalSendAttack(int Dir)
+    {
+        AttackCoroutine = StartCoroutine(HorizontalAttack(Dir));
+    }
+
+    public void VerticalSendAttack(int Dir)
+    {
+        AttackCoroutine = StartCoroutine(VerticalAttack(Dir));
+    }
+
+    IEnumerator HorizontalAttack(int Dir)
+    {
+        yield return null;
+
+        float X = 0.0f;
+        X = Mathf.Abs(HorizontalRange.transform.position.x) * Dir;
+
+        HorizontalRange.transform.position = new Vector3(X, 0, 0);
+
+        HorizontalRange.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        HorizontalRange.SetActive(false);
+
+        StopCoroutine(AttackCoroutine);
+        yield break;
+    }
+
+    IEnumerator VerticalAttack(int Dir)
+    {
+        yield return null;
+
+        float Y = 0;
+        Y = Mathf.Abs(VerticalRange.transform.position.y) * Dir;
 
         VerticalRange.transform.position = new Vector3(0, Y, 0);
+
+        VerticalRange.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        VerticalRange.SetActive(false);
+
+        StopCoroutine(AttackCoroutine);
+        yield break;
     }
 }

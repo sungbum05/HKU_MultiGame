@@ -1101,8 +1101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnterItem: {fileID: 0}
-  HorizontalRange: {fileID: 0}
-  VerticalRange: {fileID: 0}
+  HorizontalRange: {fileID: 1906594802}
+  VerticalRange: {fileID: 347722832}
 --- !u!114 &4710276467215349507
 MonoBehaviour:
   m_ObjectHideFlags: 0
