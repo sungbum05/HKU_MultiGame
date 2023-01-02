@@ -1098,7 +1098,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerName: {fileID: 674147377}
+  players: []
   Type: 0
+  MaxHp: 0
+  hp: 0
+  MaxStamina: 0
+  stamina: 0
   Chaser: {fileID: 42677726}
   Runner: {fileID: 2007266917}
 --- !u!114 &1661738494735866523

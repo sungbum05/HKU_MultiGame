@@ -11,6 +11,19 @@ public class UiManager : MonoBehaviourPun
     [SerializeField]
     private Text TimerText = null;
 
+    [SerializeField]
+    private Image PlayerHpBar;
+    [SerializeField]
+    private Image PlayerStaminaBar;
+
+    private void Update()
+    {
+        if (Player.Instance != null)
+        {
+            PlayerHpBar.fillAmount = Player.Instance.PlayerInfo.Hp / Player.Instance.PlayerInfo.MaxHp;
+            PlayerStaminaBar.fillAmount = Player.Instance.PlayerInfo.Stamina / Player.Instance.PlayerInfo.MaxStamina;
+        }
+    }
 
     [PunRPC]
     public void SettingPlyerCount()
@@ -21,5 +34,10 @@ public class UiManager : MonoBehaviourPun
         {
             GameManager.Instance.PlayersTypeSelect();
         }
+    }
+
+    public void PlayerInfoUpdate()
+    {
+
     }
 }

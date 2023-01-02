@@ -22,6 +22,40 @@ public class PlayerInfo : MonoBehaviourPun
     [SerializeField]
     private PlayerType Type;
 
+    [SerializeField]
+    public float MaxHp;
+    [SerializeField]
+    private float hp;
+    public float Hp
+    {
+        get
+        {
+            return hp;
+        }
+
+        set
+        {
+            hp = value;
+        }
+    }
+
+    [SerializeField]
+    public float MaxStamina;
+    [SerializeField]
+    private float stamina;
+    public float Stamina
+    {
+        get
+        {
+            return stamina;
+        }
+
+        set
+        {
+            stamina = value;
+        }
+    }
+
     //플레이어 하위 오브젝트
     [Header("플레이어 하위 필드")]
     [SerializeField]
@@ -39,15 +73,30 @@ public class PlayerInfo : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             PlayerName.text = "Me";
+
+            //만약 플레이어 본인 캐릭터면 플레이어 스크립트 생성
+            this.gameObject.AddComponent<Player>();
         }
 
         else
         {
             PlayerName.text = $"Player{photonView.OwnerActorNr}";
         }
+
+        BasicSetting();
+    }
+
+    //오브젝트가 생성되면서 실행되기 때문에 동기화 함수 사용 X
+    public void BasicSetting()
+    {
+        Hp = 100;
+        MaxHp = Hp;
+
+        Stamina = 50;
+        MaxStamina = Stamina;
     }
 
     [PunRPC]
@@ -59,7 +108,7 @@ public class PlayerInfo : MonoBehaviourPun
     [PunRPC]
     public void SetTypeColor()
     {
-        switch(Type)
+        switch (Type)
         {
             case PlayerType.Runner:
                 PlayerName.color = Color.green;
