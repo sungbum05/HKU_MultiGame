@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private float Speed = 0.0f;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!photonView.IsMine)
             return;

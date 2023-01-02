@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject PlayerPrefab;
     public List<GameObject> LocalPlayerList;
 
+    public GameObject RunnerSpawnPoint;
+    public GameObject ChaserSpawnPoint;
+
     private void Awake()
     {
         if (Instance != this)

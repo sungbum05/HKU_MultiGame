@@ -113,11 +113,13 @@ public class PlayerInfo : MonoBehaviourPun
             case PlayerType.Runner:
                 PlayerName.color = Color.green;
                 this.gameObject.tag = "Runner";
+                this.gameObject.transform.position = GameManager.Instance.RunnerSpawnPoint.transform.position;
                 break;
 
             case PlayerType.Chaser:
                 PlayerName.color = Color.red;
                 this.gameObject.tag = "Chaser";
+                this.gameObject.transform.position = GameManager.Instance.ChaserSpawnPoint.transform.position;
                 break;
 
             default:
