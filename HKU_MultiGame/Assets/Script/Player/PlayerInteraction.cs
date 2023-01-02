@@ -5,6 +5,10 @@ using Photon.Pun;
 
 public class PlayerInteraction : MonoBehaviourPunCallbacks
 {
+    [Header("플레이어 정보 컴포넌트")]
+    [SerializeField]
+    private PlayerInfo PlayerInfo;
+
     [Header("플레이어 하위 상호작용 필드_아이템")]
     [SerializeField]
     private GameObject EnterItem;
@@ -15,6 +19,11 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject VerticalRange;
     private Coroutine AttackCoroutine;
+
+    private void Start()
+    {
+        PlayerInfo = this.GetComponent<PlayerInfo>();
+    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -83,5 +92,11 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
 
         StopCoroutine(AttackCoroutine);
         yield break;
+    }
+
+    [PunRPC]
+    public void Hit(int Damage)
+    {
+        PlayerInfo.Hp -= Damage;
     }
 }

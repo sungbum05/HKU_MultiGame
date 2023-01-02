@@ -1131,6 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2de7227e22723342832e9fb6ecccef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerInfo: {fileID: 0}
   EnterItem: {fileID: 0}
   HorizontalRange: {fileID: 1906594802}
   VerticalRange: {fileID: 347722832}
