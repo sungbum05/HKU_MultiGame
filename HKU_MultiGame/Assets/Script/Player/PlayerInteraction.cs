@@ -56,9 +56,9 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
         yield return null;
 
         float X = 0.0f;
-        X = Mathf.Abs(HorizontalRange.transform.position.x) * Dir;
+        X = Mathf.Abs(HorizontalRange.transform.localPosition.x) * Dir;
 
-        HorizontalRange.transform.position = new Vector3(X, 0, 0);
+        HorizontalRange.transform.localPosition = new Vector3(X, 0, 0);
 
         HorizontalRange.SetActive(true);
         yield return new WaitForSeconds(0.5f);
@@ -73,9 +73,9 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
         yield return null;
 
         float Y = 0;
-        Y = Mathf.Abs(VerticalRange.transform.position.y) * Dir;
+        Y = Mathf.Abs(VerticalRange.transform.localPosition.y) * Dir;
 
-        VerticalRange.transform.position = new Vector3(0, Y, 0);
+        VerticalRange.transform.localPosition = new Vector3(0, Y, 0);
 
         VerticalRange.SetActive(true);
         yield return new WaitForSeconds(0.5f);

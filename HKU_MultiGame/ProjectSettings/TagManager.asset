@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Potion
   - AttackRange
+  - Chaser
+  - Runner
   layers:
   - Default
   - TransparentFX
