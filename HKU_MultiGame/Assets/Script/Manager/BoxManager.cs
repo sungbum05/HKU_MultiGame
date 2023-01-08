@@ -23,6 +23,8 @@ public class BoxManager : MonoBehaviourPun
     private List<ItemInfo> ItemSpawnList;
     [SerializeField]
     private List<ItemInfo> CompleteSpawnList;
+    [SerializeField]
+    private SpriteRenderer SpriteRenderer; 
 
     [Header("아이템 박스 관련")]
     [SerializeField]
@@ -73,10 +75,18 @@ public class BoxManager : MonoBehaviourPun
 
                 if (boxInfo != null)
                 {
-
                     if (boxInfo.ItemInfo.Type == ItemType.Key)
                     {
                         ItemPrefab.GetComponent<Item>().Use();
+                    }
+
+                    else
+                    {
+                        if (Player.Instance.PlayerInfo.Type == PlayerType.Runner)
+                        {
+                            Player.Instance.PlayerInfo.EquieItem = boxInfo.ItemInfo;
+                            SpriteRenderer.sprite = Player.Instance.PlayerInfo.EquieItem.ItemImage;
+                        }
                     }
 
                     // 아이템 이미지 투명 변경

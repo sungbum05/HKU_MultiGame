@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964227b7e5ac44a4d8f7f0bf1dbee2c0, type: 3}
   m_Name: FlashLight
   m_EditorClassIdentifier: 
+  Type: 0
+  ItemPrefab: {fileID: 8472180911808173013, guid: 023b62120edd28644af0f1567a48cb80, type: 3}
   ItemName: FlashLight
   ItemImage: {fileID: 21300000, guid: d53b949f0f30b7342a917228293db30e, type: 3}
   ItemData: {fileID: 8472180911808173010, guid: 023b62120edd28644af0f1567a48cb80, type: 3}

@@ -602,13 +602,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 44
+  m_SortingOrder: 20
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.375, y: 1.5625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -43536,17 +43536,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemSpawnInfo:
   - ItemInfo: {fileID: 11400000, guid: c07cadb20120a08478015a37e2be885c, type: 2}
-    SpawnCount: 0
+    SpawnCount: 4
+  - ItemInfo: {fileID: 11400000, guid: 4643f097f8e1f4240877b68e2ad0ff74, type: 2}
+    SpawnCount: 4
+  - ItemInfo: {fileID: 11400000, guid: 32ee45882818b314b9479307f0aafa1d, type: 2}
+    SpawnCount: 4
   - ItemInfo: {fileID: 11400000, guid: 152668dda26bbe24a9ef37fd9412ea3f, type: 2}
-    SpawnCount: 5
+    SpawnCount: 1
   - ItemInfo: {fileID: 11400000, guid: a2e2a31f845c47b48a2fa754286fb729, type: 2}
-    SpawnCount: 5
+    SpawnCount: 1
   - ItemInfo: {fileID: 11400000, guid: 96db317acb7f1ec48bd0470e03e68e06, type: 2}
-    SpawnCount: 5
-  - ItemInfo: {fileID: 11400000, guid: 51775a245418a064896dc87a59f43921, type: 2}
-    SpawnCount: 0
+    SpawnCount: 1
   ItemSpawnList: []
   CompleteSpawnList: []
+  SpriteRenderer: {fileID: 113018180}
   FieldChestList: []
   SeletIndex: 0
   SelectObject: {fileID: 1042194107}

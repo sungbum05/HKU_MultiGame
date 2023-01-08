@@ -5,15 +5,23 @@ using Photon.Pun;
 
 public class EnergeDrink : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    [PunRPC]
+    protected override void ItemEffect()
     {
-        
-    }
+        base.ItemEffect();
+        Debug.Log("Child");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Player.Instance.PlayerInfo.Type == PlayerType.Runner && Player.Instance.PlayerInfo.IsEnergeDrink == false)
+        {
+            if(Player.Instance.PlayerInfo.Hp + 10 > Player.Instance.PlayerInfo.MaxHp)
+            {
+                Player.Instance.PlayerInfo.Hp = Player.Instance.PlayerInfo.MaxHp;
+            }
+
+            else
+            {
+                Player.Instance.PlayerInfo.Hp += 10;
+            }
+        }
     }
 }

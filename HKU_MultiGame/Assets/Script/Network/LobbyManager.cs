@@ -35,6 +35,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         //버튼 등록
         CreateRoomButton.onClick.AddListener(() => CreatRoom());
+        SoundMgr.In.ChangeBGM("BGM_Fugitive_Normal_1");
     }
 
     public void CreatRoom()
@@ -44,7 +45,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         RoomOptions.IsOpen = true;
         RoomOptions.IsVisible = true;
-        RoomOptions.MaxPlayers = 2;
+        RoomOptions.MaxPlayers = 4;
         Debug.Log(PhotonNetwork.CountOfRooms);
 
         PhotonNetwork.CreateRoom($"Room_{PhotonNetwork.CountOfRooms}", RoomOptions);

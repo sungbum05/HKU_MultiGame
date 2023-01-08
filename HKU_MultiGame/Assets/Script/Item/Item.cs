@@ -13,6 +13,6 @@ public class Item : MonoBehaviourPunCallbacks
     [PunRPC]
     protected virtual void ItemEffect()
     {
-        this.gameObject.SetActive(false);
+        this.gameObject.SetActive(true);
     }
 }

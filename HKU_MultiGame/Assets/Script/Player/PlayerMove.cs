@@ -58,7 +58,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     void Run()
     {
-        if (PlayerInfo.Type == PlayerType.Runner)
+        if (PlayerInfo.Type == PlayerType.Runner && PlayerInfo.IsShose == false)
         {
             //스태미나 사용
             if (Input.GetKey(KeyCode.LeftShift) == true && IsTired == false)

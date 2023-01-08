@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964227b7e5ac44a4d8f7f0bf1dbee2c0, type: 3}
   m_Name: EnergeDrink
   m_EditorClassIdentifier: 
+  Type: 0
+  ItemPrefab: {fileID: 6984499139170418049, guid: 8788cc8eff081c446a806c52a8a1886d, type: 3}
   ItemName: Energe Drink
   ItemImage: {fileID: 21300000, guid: bcf65fa052b72844181d4066eeb84376, type: 3}
   ItemData: {fileID: 6984499139170418060, guid: 8788cc8eff081c446a806c52a8a1886d, type: 3}

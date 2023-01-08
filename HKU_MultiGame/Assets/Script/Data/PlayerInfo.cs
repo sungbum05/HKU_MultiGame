@@ -92,12 +92,21 @@ public class PlayerInfo : MonoBehaviourPun
     private GameObject Runner = null;
 
     [Header("플레이어 하위 필드_아이템")]
+    public ItemInfo EquieItem;
     [SerializeField]
-    private GameObject EquieItem;
+    private SpriteRenderer SpriteRenderer;
 
     public bool IsAttack = false;
     public bool IsOpenChest = false;
     public bool IsHide = false;
+
+    //아이템 체크
+    public bool IsShose = false;
+    public bool IsBible = false;
+    public bool IsEnergeDrink = false;
+    public bool IsFlashLight = false;
+    public bool IsMilk = false;
+
 
     private void Awake()
     {
@@ -123,7 +132,21 @@ public class PlayerInfo : MonoBehaviourPun
         }
 
         BasicSetting();
+
+        SpriteRenderer = GameObject.Find("ItemImage").GetComponent<SpriteRenderer>();
         PlayerMove = this.GetComponent<PlayerMove>();
+    }
+
+    private void Update()
+    {
+        if(photonView.IsMine == true && EquieItem != null && Input.GetKeyDown(KeyCode.Q) && Type == PlayerType.Runner)
+        {
+            GameObject ItemPrefab = PhotonNetwork.Instantiate(EquieItem.ItemPrefab.name, new Vector3(200, 200, 200), Quaternion.identity);
+            ItemPrefab.GetComponent<Item>().Use();
+            EquieItem = null;
+
+            SpriteRenderer.sprite = null;
+        }
     }
 
     //오브젝트가 생성되면서 실행되기 때문에 동기화 함수 사용 X
@@ -157,9 +180,29 @@ public class PlayerInfo : MonoBehaviourPun
         }
 
         Type = playerType;
+        PlayerName.gameObject.SetActive(false);
 
         Player.Instance.PlayerMove.Speed = CurPlayerData.Speed;
         PlayerAnimator.runtimeAnimatorController = CurPlayerData.Animator;
+
+        //사운드 변경
+        if(this.photonView.IsMine == true)
+        {
+            switch (playerType)
+            {
+                case PlayerType.Runner:
+                    SoundMgr.In.ChangeBGM("BGM_Fugitive_Normal_1");
+
+                    break;
+
+                case PlayerType.Chaser:
+                    SoundMgr.In.ChangeBGM("BGM_Chaser");
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     [PunRPC]
@@ -238,7 +281,6 @@ public class PlayerInfo : MonoBehaviourPun
     [PunRPC]
     public void OnHide()
     {
-
         IsHide = true;
 
         this.GetComponent<BoxCollider2D>().enabled = false;
