@@ -15,6 +15,8 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
 
     [Header("플레이어 하위 상호작용 필드_공격")]
     [SerializeField]
+    private GameObject AttackEffect;
+    [SerializeField]
     private GameObject HorizontalRange;
     [SerializeField]
     private GameObject VerticalRange;
@@ -36,18 +38,23 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+        if (PlayerInfo.photonView.IsMine == true)
+        {
+            if (PlayerInfo != null && PlayerInfo.IsAttack == false && PlayerInfo.Type == PlayerType.Chaser)
+            {
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                    HorizontalSendAttack(1);
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-            HorizontalSendAttack(1);
+                else if (Input.GetKeyDown(KeyCode.LeftArrow))
+                    HorizontalSendAttack(-1);
 
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            HorizontalSendAttack(-1);
+                else if (Input.GetKeyDown(KeyCode.UpArrow))
+                    VerticalSendAttack(1);
 
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-            VerticalSendAttack(1);
-
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-            VerticalSendAttack(-1);
+                else if (Input.GetKeyDown(KeyCode.DownArrow))
+                    VerticalSendAttack(-1);
+            }
+        }
     }
 
     public void HorizontalSendAttack(int Dir)
@@ -63,15 +70,24 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
     IEnumerator HorizontalAttack(int Dir)
     {
         yield return null;
+        PlayerInfo.IsAttack = true;
 
         float X = 0.0f;
         X = Mathf.Abs(HorizontalRange.transform.localPosition.x) * Dir;
 
         HorizontalRange.transform.localPosition = new Vector3(X, 0, 0);
+        GameObject Attack = PhotonNetwork.Instantiate(AttackEffect.name, HorizontalRange.transform.position, Quaternion.identity);
+        Debug.Log("Instantiate");
 
         HorizontalRange.SetActive(true);
+
         yield return new WaitForSeconds(0.5f);
+
         HorizontalRange.SetActive(false);
+        PhotonNetwork.Destroy(Attack);
+
+        yield return new WaitForSeconds(1.0f);
+        PlayerInfo.IsAttack = false;
 
         StopCoroutine(AttackCoroutine);
         yield break;
@@ -80,15 +96,24 @@ public class PlayerInteraction : MonoBehaviourPunCallbacks
     IEnumerator VerticalAttack(int Dir)
     {
         yield return null;
+        PlayerInfo.IsAttack = true;
 
         float Y = 0;
         Y = Mathf.Abs(VerticalRange.transform.localPosition.y) * Dir;
 
         VerticalRange.transform.localPosition = new Vector3(0, Y, 0);
+        GameObject Attack = PhotonNetwork.Instantiate(AttackEffect.name, VerticalRange.transform.position, Quaternion.identity);
+        Debug.Log("Instantiate");
 
         VerticalRange.SetActive(true);
+
         yield return new WaitForSeconds(0.5f);
+
         VerticalRange.SetActive(false);
+        PhotonNetwork.Destroy(Attack);
+
+        yield return new WaitForSeconds(1.0f);
+        PlayerInfo.IsAttack = false;
 
         StopCoroutine(AttackCoroutine);
         yield break;

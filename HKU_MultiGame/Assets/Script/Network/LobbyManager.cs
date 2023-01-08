@@ -16,6 +16,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Button CreateRoomButton;
     public GameObject JoinRoomButton;
 
+    public List<RoomData> RoomList;
+
     //게임 실행과 동시에 마스터 서버 접속
     // Start is called before the first frame update
     void Awake()
@@ -105,6 +107,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             RoomInfoButton.transform.SetParent(ScrollViewContent.transform);
 
             RoomInfoButton.RoomSetting(RoomInfo.Name, RoomInfo.MaxPlayers, RoomInfo.PlayerCount);
+            RoomList.Add(RoomInfoButton);
+        }
+
+        foreach (var m_RoomData in RoomList)
+        {
+            if(m_RoomData.CurPlayer <= 0)
+            {
+                RoomData Data = m_RoomData;
+
+                RoomList.Remove(Data);
+                Destroy(Data);
+            }
         }
     }
     #endregion

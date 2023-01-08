@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964227b7e5ac44a4d8f7f0bf1dbee2c0, type: 3}
+  m_Name: FireExtinguisher
+  m_EditorClassIdentifier: 
+  ItemName: FireExtinguisher
+  ItemImage: {fileID: 21300000, guid: 61909ed323008e5489061089fbdacee2, type: 3}
+  ItemData: {fileID: 7744226255906201173, guid: f5aaed4de2e42ec4b8cf9abfe742e6d9, type: 3}

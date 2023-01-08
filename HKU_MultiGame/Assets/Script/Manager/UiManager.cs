@@ -4,10 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class UiManager : MonoBehaviourPun
+public class UiManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private Text PlayerCountText = null;
+    private static UiManager m_Instance;
+    public static UiManager Instance
+    {
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = FindObjectOfType<UiManager>();
+            }
+
+            return m_Instance;
+        }
+    }
+
     [SerializeField]
     private Text TimerText = null;
 
@@ -15,6 +27,20 @@ public class UiManager : MonoBehaviourPun
     private Image PlayerHpBar;
     [SerializeField]
     private Image PlayerStaminaBar;
+
+    [Header("¿£µù")]
+    [SerializeField]
+    private GameObject HappyEnding;
+    [SerializeField]
+    private GameObject SadEnding;
+
+    private void Awake()
+    {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Update()
     {
@@ -28,16 +54,29 @@ public class UiManager : MonoBehaviourPun
     [PunRPC]
     public void SettingPlyerCount()
     {
-        PlayerCountText.text = $"{PhotonNetwork.CurrentRoom.PlayerCount} / {PhotonNetwork.CurrentRoom.MaxPlayers}";
-
         if (PhotonNetwork.CurrentRoom.PlayerCount.Equals(PhotonNetwork.CurrentRoom.MaxPlayers) && PhotonNetwork.IsMasterClient)
         {
             GameManager.Instance.PlayersTypeSelect();
         }
     }
 
-    public void PlayerInfoUpdate()
+    public void LeaveRoom()
     {
+        PhotonNetwork.LeaveRoom();
+    }
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+        PhotonNetwork.LoadLevel("LobbyScene");
+    }
 
+    public void OnHappyEnding()
+    {
+        HappyEnding.SetActive(true);
+    }
+
+    public void OnSadEnding()
+    {
+        SadEnding.SetActive(true);
     }
 }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2173463ad30e6d74987e3af91b686b8d, type: 3}
+  m_Name: Chaser_2
+  m_EditorClassIdentifier: 
+  Name: Sister
+  PlayerType: 1
+  Animator: {fileID: 9100000, guid: d7e0cfffb882b1240b203d1ad37d5806, type: 2}
+  Index: 2
+  Speed: 6.5

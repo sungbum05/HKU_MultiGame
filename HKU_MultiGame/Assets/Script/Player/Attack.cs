@@ -11,7 +11,7 @@ public class Attack : MonoBehaviour
         {
             Debug.Log("Hit");
 
-            Other.GetComponent<PlayerInteraction>().photonView.RPC("Hit", RpcTarget.All, 50);
+            Other.GetComponent<PlayerInteraction>().photonView.RPC("Hit", RpcTarget.All, 25);
         }
     }
 }
