@@ -45,7 +45,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         RoomOptions.IsOpen = true;
         RoomOptions.IsVisible = true;
-        RoomOptions.MaxPlayers = 2;
+        RoomOptions.MaxPlayers = 4;
         Debug.Log(PhotonNetwork.CountOfRooms);
 
         PhotonNetwork.CreateRoom($"Room_{PhotonNetwork.CountOfRooms}", RoomOptions);
