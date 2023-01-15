@@ -44,6 +44,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("생성 중...");
         RoomOptions RoomOptions = new RoomOptions();
 
+        Debug.Log("행복");
         RoomOptions.IsOpen = true;
         RoomOptions.IsVisible = true;
         RoomOptions.MaxPlayers = 4;
