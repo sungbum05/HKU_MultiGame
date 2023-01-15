@@ -7,6 +7,7 @@ using Photon.Realtime;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
+    //로비 정보
     private string gameVersion = "1"; // 게임 버전
     [SerializeField]
     private int RoomCnt = 1;
