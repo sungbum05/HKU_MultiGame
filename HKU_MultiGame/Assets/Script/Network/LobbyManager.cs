@@ -39,6 +39,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         SoundMgr.In.ChangeBGM("BGM_Fugitive_Normal_1");
     }
 
+    //방 만들기
     public void CreatRoom()
     {
         Debug.Log("생성 중...");
